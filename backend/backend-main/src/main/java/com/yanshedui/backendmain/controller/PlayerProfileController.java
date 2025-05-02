@@ -2,12 +2,14 @@ package com.yanshedui.backendmain.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yanshedui.backendcommon.entity.PlayerProfile;
+import com.yanshedui.backendcommon.entity.dto.PlayerProfileDTO;
 import com.yanshedui.backendcommon.entity.vo.PageVO;
 import com.yanshedui.backendcommon.entity.vo.PlayerProfileVO;
 import com.yanshedui.backendcommon.results.Result;
 import com.yanshedui.backendcommon.results.ResultCode;
 import com.yanshedui.backendcommon.results.ResultMessage;
 import com.yanshedui.backendteam.service.PlayerProfileService;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +54,22 @@ public class PlayerProfileController {
         return Result.success(ResultCode.SelectSuccess, pageVO);
     }
 
+    @PutMapping("/updatePlayerProfile/{id}")
+    public Result<String> updatePlayerProfile(
+            @PathVariable Integer id,
+            @Valid @RequestBody PlayerProfile playerProfile
+    ) {
 
+        playerProfile.setProfileId(id);
+        PlayerProfileDTO playerProfileDTO = new PlayerProfileDTO();
+        BeanUtils.copyProperties(playerProfile, playerProfileDTO);
+
+        Boolean isUpdated = playerProfileService.updatePlayerProfileById(playerProfileDTO);
+
+        if(!isUpdated) {
+            return Result.error(ResultCode.UpdateError, ResultMessage.UpdateError);
+        }
+        return Result.success(ResultCode.UpdateSuccess, ResultMessage.UpdateSuccess);
+    }
 
 }
