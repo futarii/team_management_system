@@ -1,5 +1,6 @@
 package com.yanshedui.backendcommon.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import jakarta.validation.constraints.NotBlank;
@@ -8,7 +9,7 @@ import jakarta.validation.constraints.Pattern;
 @TableName("team_position")
 public class TeamPosition {
 
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Integer positionId;
 
     @NotBlank(message = "角色名称不能为空")

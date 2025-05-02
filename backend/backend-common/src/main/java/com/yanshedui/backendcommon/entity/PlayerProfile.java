@@ -1,5 +1,6 @@
 package com.yanshedui.backendcommon.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import jakarta.validation.constraints.*;
@@ -9,7 +10,7 @@ import java.time.LocalDate;
 @TableName("player_profile")
 public class PlayerProfile {
 
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Integer profileId;
 
     @NotNull(message = "用户ID不能为空")

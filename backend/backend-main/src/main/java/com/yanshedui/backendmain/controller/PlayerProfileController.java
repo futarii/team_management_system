@@ -6,6 +6,7 @@ import com.yanshedui.backendcommon.entity.vo.PageVO;
 import com.yanshedui.backendcommon.entity.vo.PlayerProfileVO;
 import com.yanshedui.backendcommon.results.Result;
 import com.yanshedui.backendcommon.results.ResultCode;
+import com.yanshedui.backendcommon.results.ResultMessage;
 import com.yanshedui.backendteam.service.PlayerProfileService;
 import jakarta.validation.constraints.Min;
 import org.springframework.beans.BeanUtils;
@@ -26,11 +27,11 @@ public class PlayerProfileController {
     @GetMapping("/getPlayersByPage/{currentPage}/{pageSize}")
     public Result<PageVO<PlayerProfileVO>> getPlayersByPage(
             @PathVariable
-            @Min(value = 1, message = "当前页码必须大于等于1")
+            @Min(value = 1, message = ResultMessage.CurrentPageValid)
             Integer currentPage,
 
             @PathVariable
-            @Min(value = 1, message = "每页数量必须大于等于1")
+            @Min(value = 1, message = ResultMessage.PageSizeValid)
             Integer pageSize
     ) {
         Page<PlayerProfile> playersByPage = playerProfileService.getPlayersByPage(currentPage, pageSize);
