@@ -7,6 +7,8 @@ import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
 
+import static com.yanshedui.backendcommon.results.ResultMessage.*;
+
 @TableName("player_profile")
 public class PlayerProfile {
 
@@ -15,25 +17,25 @@ public class PlayerProfile {
 
     private Integer userId;
 
-    @NotBlank(message = "真实姓名不能为空")
+    @NotBlank(message = RealNameEmpty)
     private String realName;
 
-    @Min(value = 0, message = "球衣号必须为正数或0")
+    @Min(value = 0, message = JerseyNumberBeNegative)
     private Integer jerseyNumber;
 
     @Pattern(
             regexp = "^(forward|guard|center)$",
-            message = "球场位置必须是 forward、guard 或 center 之一"
+            message = PositionSelectionIncorrect
     )
     private String position;
 
-    @Digits(integer = 1, fraction = 2, message = "身高格式不正确")
+    @Digits(integer = 1, fraction = 2, message = HeightFormatIncorrect)
     private Float height;
 
-    @Digits(integer = 3, fraction = 2, message = "体重格式不正确")
+    @Digits(integer = 3, fraction = 2, message = WeightFormatIncorrect)
     private Float weight;
 
-    @NotNull(message = "入队日期不能为空")
+    @NotNull(message = JoinDateEmpty)
     private LocalDate joinDate;
 
     public PlayerProfile() {

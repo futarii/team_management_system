@@ -14,4 +14,18 @@ public interface ResultMessage {
     public static final String PathNotFound = "请求路径不存在:";
     public static final String SystemError = "系统繁忙，请稍后再试";
 
+    public static final String TitleNotFilled = "未填写标题";
+    public static final String ContentNotFilled = "未填写标题";
+    public static final String PositionNameEmpty = "角色名称不能为空";
+    public static final String PositionCodeEmpty = "角色代码不能为空";
+    public static final String PositionCodeLowercaseLetters = "角色代码必须为小写字母";
+    public static final String RealNameEmpty = "真实姓名不能为空";
+    public static final String JerseyNumberBeNegative = "球衣号必须为正数或0";
+    public static final String PositionSelectionIncorrect = "球场位置必须是 forward、guard 或 center 之一";
+    public static final String HeightFormatIncorrect = "身高格式不正确";
+    public static final String WeightFormatIncorrect = "体重格式不正确";
+    public static final String JoinDateEmpty = "入队日期不能为空";
+
+
+
 }

@@ -6,17 +6,19 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
+import static com.yanshedui.backendcommon.results.ResultMessage.*;
+
 @TableName("team_position")
 public class TeamPosition {
 
     @TableId(type = IdType.AUTO)
     private Integer positionId;
 
-    @NotBlank(message = "角色名称不能为空")
+    @NotBlank(message = PositionNameEmpty)
     private String positionName;
 
-    @NotBlank(message = "角色代码不能为空")
-    @Pattern(regexp = "^[a-z]+$", message = "角色代码必须为小写字母")
+    @NotBlank(message = PositionCodeEmpty)
+    @Pattern(regexp = "^[a-z]+$", message = PositionCodeLowercaseLetters)
     private String positionCode;
 
     public TeamPosition() {

@@ -41,13 +41,13 @@ public class TeamPositionController {
         Page<TeamPosition> teamPositionByPages = teamPositionService.getTeamPositionByPages(currentPage, pageSize);
 
         List<TeamPositionVO> teamPositionVOList = teamPositionByPages.getRecords()
-            .stream()
-            .map(teamPosition -> {
-                TeamPositionVO teamPositionVO = new TeamPositionVO();
-                BeanUtils.copyProperties(teamPosition, teamPositionVO);
-                return teamPositionVO;
-            })
-            .toList();
+                .stream()
+                .map(teamPosition -> {
+                    TeamPositionVO teamPositionVO = new TeamPositionVO();
+                    BeanUtils.copyProperties(teamPosition, teamPositionVO);
+                    return teamPositionVO;
+                })
+                .toList();
 
         PageVO<TeamPositionVO> pageVO = new PageVO<>();
         pageVO.setRecords(teamPositionVOList);

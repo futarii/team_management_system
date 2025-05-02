@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanshedui.backendannouncement.dao.AnnouncementDao">
+    <resultMap id="announcementVOMap" type="com.yanshedui.backendcommon.entity.vo.AnnouncementVO">
+        <id property="announceId" column="announce_id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="username" column="username"/>
+        <result property="publishTime" column="publish_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <select id="selectAnnouncementWithUserPage" resultMap="announcementVOMap">
+        SELECT
+            a.announce_id,
+            a.title,
+            a.content,
+            u.username,
+            a.publish_time,
+            a.update_time
+        FROM announcement a
+                 LEFT JOIN sys_user u ON a.publisher_id = u.user_id
+        ORDER BY a.publish_time DESC
+    </select>
+</mapper>

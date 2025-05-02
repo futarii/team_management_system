@@ -1,39 +1,29 @@
-package com.yanshedui.backendcommon.entity;
-
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import jakarta.validation.constraints.NotBlank;
+package com.yanshedui.backendcommon.entity.vo;
 
 import java.time.LocalDateTime;
 
-import static com.yanshedui.backendcommon.results.ResultMessage.ContentNotFilled;
-import static com.yanshedui.backendcommon.results.ResultMessage.TitleNotFilled;
+public class AnnouncementVO {
 
-@TableName("announcement")
-public class Announcement {
-
-    @TableId(type = IdType.AUTO)
     private Integer announceId;
 
-    @NotBlank(message = TitleNotFilled)
     private String title;
 
-    @NotBlank(message = ContentNotFilled)
     private String content;
 
-    private Integer publisherId;
+    private String username;
+
     private LocalDateTime publishTime;
+
     private LocalDateTime updateTime;
 
-    public Announcement() {
+    public AnnouncementVO() {
     }
 
-    public Announcement(Integer announceId, String title, String content, Integer publisherId, LocalDateTime publishTime, LocalDateTime updateTime) {
+    public AnnouncementVO(Integer announceId, String title, String content, String username, LocalDateTime publishTime, LocalDateTime updateTime) {
         this.announceId = announceId;
         this.title = title;
         this.content = content;
-        this.publisherId = publisherId;
+        this.username = username;
         this.publishTime = publishTime;
         this.updateTime = updateTime;
     }
@@ -62,12 +52,12 @@ public class Announcement {
         this.content = content;
     }
 
-    public Integer getPublisherId() {
-        return publisherId;
+    public String getUsername() {
+        return username;
     }
 
-    public void setPublisherId(Integer publisherId) {
-        this.publisherId = publisherId;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public LocalDateTime getPublishTime() {
@@ -88,11 +78,11 @@ public class Announcement {
 
     @Override
     public String toString() {
-        return "Announcement{" +
+        return "AnnouncementVO{" +
                 "announceId=" + announceId +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
-                ", publisherId=" + publisherId +
+                ", username='" + username + '\'' +
                 ", publishTime=" + publishTime +
                 ", updateTime=" + updateTime +
                 '}';

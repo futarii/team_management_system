@@ -13,10 +13,8 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:/mapper/**/*.xml
 
 logging:
   level:
-    # 监控 Spring Web 模块的日志
     org.springframework.web: DEBUG
-    # 监控 Jackson 序列化/反序列化过程
-    com.fasterxml.jackson.databind: DEBUG
