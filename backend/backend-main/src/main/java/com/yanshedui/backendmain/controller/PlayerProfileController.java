@@ -8,6 +8,7 @@ import com.yanshedui.backendcommon.entity.vo.PlayerProfileVO;
 import com.yanshedui.backendcommon.results.Result;
 import com.yanshedui.backendcommon.results.ResultCode;
 import com.yanshedui.backendcommon.results.ResultMessage;
+import com.yanshedui.backendcommon.utils.PageVOUtil;
 import com.yanshedui.backendteam.service.PlayerProfileService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
@@ -37,20 +38,7 @@ public class PlayerProfileController {
             Integer pageSize
     ) {
         Page<PlayerProfile> playersByPage = playerProfileService.getPlayersByPage(currentPage, pageSize);
-        List<PlayerProfileVO> playerProfileVOList = playersByPage.getRecords().stream()
-                .map(playerProfile -> {
-                    PlayerProfileVO playerProfileVO = new PlayerProfileVO();
-                    BeanUtils.copyProperties(playerProfile, playerProfileVO);
-                    return playerProfileVO;
-                })
-                .toList();
-
-        PageVO<PlayerProfileVO> pageVO = new PageVO<>();
-        pageVO.setRecords(playerProfileVOList);
-        pageVO.setCurrentPage(playersByPage.getCurrent());
-        pageVO.setPageSize(playersByPage.getSize());
-        pageVO.setTotal(playersByPage.getTotal());
-
+        PageVO<PlayerProfileVO> pageVO = PageVOUtil.getPageVOByDataVO(playersByPage, PlayerProfileVO.class);
         return Result.success(ResultCode.SelectSuccess, pageVO);
     }
 

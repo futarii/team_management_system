@@ -7,15 +7,17 @@ public class PageVO<T> {
     private List<T> records;
     private Long currentPage;
     private Long pageSize;
+    private Long pageNum;
     private Long total;
 
     public PageVO() {
     }
 
-    public PageVO(List<T> records, Long currentPage, Long pageSize, Long total) {
+    public PageVO(List<T> records, Long currentPage, Long pageSize, Long pageNum, Long total) {
         this.records = records;
         this.currentPage = currentPage;
         this.pageSize = pageSize;
+        this.pageNum = pageNum;
         this.total = total;
     }
 
@@ -43,6 +45,14 @@ public class PageVO<T> {
         this.pageSize = pageSize;
     }
 
+    public Long getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(Long pageNum) {
+        this.pageNum = pageNum;
+    }
+
     public Long getTotal() {
         return total;
     }
@@ -57,6 +67,7 @@ public class PageVO<T> {
                 "records=" + records +
                 ", currentPage=" + currentPage +
                 ", pageSize=" + pageSize +
+                ", pageNum=" + pageNum +
                 ", total=" + total +
                 '}';
     }

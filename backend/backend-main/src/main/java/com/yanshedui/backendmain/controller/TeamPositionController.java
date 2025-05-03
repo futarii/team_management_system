@@ -8,6 +8,7 @@ import com.yanshedui.backendcommon.exception.BusinessException;
 import com.yanshedui.backendcommon.results.Result;
 import com.yanshedui.backendcommon.results.ResultCode;
 import com.yanshedui.backendcommon.results.ResultMessage;
+import com.yanshedui.backendcommon.utils.PageVOUtil;
 import com.yanshedui.backendteam.service.TeamPositionService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
@@ -37,26 +38,9 @@ public class TeamPositionController {
             @Min(value = 1, message = ResultMessage.PageSizeValid)
             Integer pageSize
     ) {
-
         Page<TeamPosition> teamPositionByPages = teamPositionService.getTeamPositionByPages(currentPage, pageSize);
-
-        List<TeamPositionVO> teamPositionVOList = teamPositionByPages.getRecords()
-                .stream()
-                .map(teamPosition -> {
-                    TeamPositionVO teamPositionVO = new TeamPositionVO();
-                    BeanUtils.copyProperties(teamPosition, teamPositionVO);
-                    return teamPositionVO;
-                })
-                .toList();
-
-        PageVO<TeamPositionVO> pageVO = new PageVO<>();
-        pageVO.setRecords(teamPositionVOList);
-        pageVO.setCurrentPage(teamPositionByPages.getCurrent());
-        pageVO.setPageSize(teamPositionByPages.getSize());
-        pageVO.setTotal(teamPositionByPages.getTotal());
-
+        PageVO<TeamPositionVO> pageVO = PageVOUtil.getPageVOByDataVO(teamPositionByPages, TeamPositionVO.class);
         return Result.success(ResultCode.SelectSuccess, pageVO);
-
     }
 
     @PostMapping("/createTeamPosition")

@@ -12,12 +12,14 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 		"com.yanshedui.backendteam",
 		"com.yanshedui.backendcommon",
 		"com.yanshedui.backendannouncement",
-		"com.yanshedui.backendsystem"
+		"com.yanshedui.backendsystem",
+		"com.yanshedui.backendschedule"
 })
 @MapperScan(basePackages = {
 		"com.yanshedui.backendteam.dao",
 		"com.yanshedui.backendannouncement.dao",
-		"com.yanshedui.backendsystem.dao"
+		"com.yanshedui.backendsystem.dao",
+		"com.yanshedui.backendschedule.dao"
 })
 public class BackendMainApplication {
 

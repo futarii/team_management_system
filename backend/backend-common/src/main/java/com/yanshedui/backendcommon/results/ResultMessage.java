@@ -12,7 +12,7 @@ public interface ResultMessage {
     public static final String UpdateError = "更新失败";
     public static final String DataAlreadyExist = "请勿重复添加数据";
     public static final String PathNotFound = "请求路径不存在:";
-    public static final String SystemError = "系统繁忙，请稍后再试";
+    public static final String SystemError = "系统错误，请联系管理员";
 
     public static final String TitleNotFilled = "未填写标题";
     public static final String ContentNotFilled = "未填写标题";
@@ -25,6 +25,11 @@ public interface ResultMessage {
     public static final String HeightFormatIncorrect = "身高格式不正确";
     public static final String WeightFormatIncorrect = "体重格式不正确";
     public static final String JoinDateEmpty = "入队日期不能为空";
+    public static final String MatchNameEmpty = "比赛名称不能为空";
+    public static final String MatchTimeEmpty = "比赛时间不能为空";
+    public static final String MatchLocationEmpty = "比赛地点不能为空";
+    public static final String OpponentEmpty = "对手球队不能为空";
+
 
 
 

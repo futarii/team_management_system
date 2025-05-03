@@ -17,14 +17,14 @@ public class User {
 
     private String password;
 
-    private Integer status;
+    private Byte status;
 
     private LocalDateTime createTime;
 
     public User() {
     }
 
-    public User(Integer userId, String username, String password, Integer status, LocalDateTime createTime) {
+    public User(Integer userId, String username, String password, Byte status, LocalDateTime createTime) {
         this.userId = userId;
         this.username = username;
         this.password = password;
@@ -56,11 +56,11 @@ public class User {
         this.password = password;
     }
 
-    public Integer getStatus() {
+    public Byte getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Byte status) {
         this.status = status;
     }
 
