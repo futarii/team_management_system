@@ -11,7 +11,7 @@
  Target Server Version : 80026
  File Encoding         : 65001
 
- Date: 02/05/2025 17:05:38
+ Date: 04/05/2025 17:59:36
 */
 
 SET NAMES utf8mb4;
@@ -31,13 +31,14 @@ CREATE TABLE `announcement`  (
   PRIMARY KEY (`announce_id`) USING BTREE,
   INDEX `publisher_id`(`publisher_id`) USING BTREE,
   CONSTRAINT `announcement_ibfk_1` FOREIGN KEY (`publisher_id`) REFERENCES `sys_user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '公告表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '公告表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of announcement
 -- ----------------------------
-INSERT INTO `announcement` VALUES (1, '新赛季训练计划', '每周一三五下午4点体育馆集训', 1, '2025-04-27 14:01:30', '2025-04-27 14:01:30');
+INSERT INTO `announcement` VALUES (1, '新赛季训练计划概览', '每周一三五下午4点体育馆集训', 1, '2025-04-27 14:01:30', '2025-05-03 08:47:56');
 INSERT INTO `announcement` VALUES (2, '队服尺寸统计通知', '请全体队员本周五前上报尺码', 1, '2025-04-27 14:01:30', '2025-04-27 14:01:30');
+INSERT INTO `announcement` VALUES (3, '最新公告', '每周一三五下午3点体育馆集训', 1, '2025-05-03 09:01:23', '2025-05-03 09:01:57');
 
 -- ----------------------------
 -- Table structure for player_profile
@@ -76,17 +77,19 @@ CREATE TABLE `schedule`  (
   `match_time` datetime(0) NOT NULL COMMENT '比赛时间',
   `location` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '比赛地点',
   `opponent` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '对手球队',
-  `status` tinyint(0) NOT NULL DEFAULT 0 COMMENT '状态（0未开始 1进行中 2已结束）',
+  `status` tinyint(0) NOT NULL DEFAULT 0 COMMENT '状态（0未开始 1已结束）',
   `create_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   PRIMARY KEY (`schedule_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '赛程表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '赛程表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of schedule
 -- ----------------------------
 INSERT INTO `schedule` VALUES (1, '城市联赛揭幕战', '2024-08-20 19:00:00', '市体育馆', '雷霆队', 0, '2025-04-27 14:01:30', '2025-04-27 14:01:30');
 INSERT INTO `schedule` VALUES (2, '友谊赛', '2024-09-05 15:30:00', '师大篮球馆', '师大明星队', 0, '2025-04-27 14:01:30', '2025-04-27 14:01:30');
+INSERT INTO `schedule` VALUES (6, 'NBA3X', '2024-09-05 15:30:00', '东北大学风雨操场', '金州勇士', 0, '2025-05-04 17:57:53', '2025-05-04 17:57:53');
+INSERT INTO `schedule` VALUES (7, 'NBA3X', '2024-09-05 15:30:00', '东北大学风雨操场', '金州勇士', 0, '2025-05-04 17:58:00', '2025-05-04 17:58:00');
 
 -- ----------------------------
 -- Table structure for sys_permission
@@ -98,7 +101,7 @@ CREATE TABLE `sys_permission`  (
   `perm_key` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '权限标识',
   PRIMARY KEY (`perm_id`) USING BTREE,
   UNIQUE INDEX `uniq_perm_key`(`perm_key`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统权限表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统权限表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_permission
@@ -135,7 +138,7 @@ CREATE TABLE `sys_role`  (
   `role_key` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '角色标识',
   PRIMARY KEY (`role_id`) USING BTREE,
   UNIQUE INDEX `uniq_role_key`(`role_key`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统角色表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统角色表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role
@@ -198,7 +201,7 @@ CREATE TABLE `sys_user`  (
   `create_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   PRIMARY KEY (`user_id`) USING BTREE,
   UNIQUE INDEX `uniq_username`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统用户表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统用户表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user
@@ -257,7 +260,7 @@ CREATE TABLE `team_position`  (
   `position_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '职位代码',
   PRIMARY KEY (`position_id`) USING BTREE,
   UNIQUE INDEX `uniq_pos_code`(`position_code`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '球队职位表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '球队职位表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of team_position

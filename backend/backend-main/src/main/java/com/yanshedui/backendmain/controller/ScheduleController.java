@@ -2,6 +2,7 @@ package com.yanshedui.backendmain.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yanshedui.backendcommon.entity.Schedule;
+import com.yanshedui.backendcommon.entity.dto.ScheduleDTO;
 import com.yanshedui.backendcommon.entity.vo.PageVO;
 import com.yanshedui.backendcommon.entity.vo.PlayerProfileVO;
 import com.yanshedui.backendcommon.results.Result;
@@ -11,12 +12,10 @@ import com.yanshedui.backendcommon.utils.PageVOUtil;
 import com.yanshedui.backendschedule.service.ScheduleService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/schedule")
@@ -40,5 +39,23 @@ public class ScheduleController {
         PageVO<Schedule> pageVO = PageVOUtil.getPageVO(schedulesByPages);
         return Result.success(ResultCode.SelectSuccess, pageVO);
     }
+
+    @PostMapping("/createSchedule")
+    public Result<String> createSchedule(@RequestBody Schedule schedule) {
+
+        ScheduleDTO scheduleDTO = new ScheduleDTO();
+        BeanUtils.copyProperties(schedule, scheduleDTO);
+        scheduleDTO.setScheduleId(null);
+
+        Boolean isSaved = scheduleService.createSchedule(scheduleDTO);
+
+        if(!isSaved) {
+            return Result.error(ResultCode.InsertError, ResultMessage.InsertError);
+        }
+        return Result.success(ResultCode.InsertSuccess, ResultMessage.InsertSuccess);
+
+    }
+
+
 
 }

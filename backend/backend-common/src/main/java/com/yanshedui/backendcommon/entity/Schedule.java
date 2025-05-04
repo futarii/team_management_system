@@ -3,6 +3,7 @@ package com.yanshedui.backendcommon.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -20,6 +21,7 @@ public class Schedule {
     private String matchName;
 
     @NotNull(message = MatchTimeEmpty)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime matchTime;
 
     @NotBlank(message = MatchLocationEmpty)
@@ -29,7 +31,11 @@ public class Schedule {
     private String opponent;
 
     private Byte status;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateTime;
 
     public Schedule() {
