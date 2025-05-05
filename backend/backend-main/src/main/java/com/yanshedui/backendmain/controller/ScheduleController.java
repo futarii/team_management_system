@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yanshedui.backendcommon.entity.Schedule;
 import com.yanshedui.backendcommon.entity.dto.ScheduleDTO;
 import com.yanshedui.backendcommon.entity.vo.PageVO;
-import com.yanshedui.backendcommon.entity.vo.PlayerProfileVO;
 import com.yanshedui.backendcommon.results.Result;
 import com.yanshedui.backendcommon.results.ResultCode;
 import com.yanshedui.backendcommon.results.ResultMessage;
@@ -16,6 +15,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/schedule")
@@ -56,6 +57,26 @@ public class ScheduleController {
 
     }
 
+    @PutMapping("/updateScheduleById/{id}")
+    public Result<String> updateScheduleById(@PathVariable Integer id, @Valid @RequestBody Schedule schedule) {
+        schedule.setScheduleId(id);
+        schedule.setUpdateTime(LocalDateTime.now());
+        schedule.setCreateTime(null);
+        boolean isUpdated = scheduleService.updateById(schedule);
+        if(!isUpdated) {
+            return Result.error(ResultCode.UpdateError, ResultMessage.UpdateError);
+        }
+        return Result.success(ResultCode.UpdateSuccess, ResultMessage.UpdateSuccess);
+    }
+    
+    @DeleteMapping("/deleteScheduleById/{id}")
+    public Result<String> deleteScheduleById(@PathVariable Integer id) {
+        boolean isDeleted = scheduleService.removeById(id);
+        if(!isDeleted) {
+            return Result.error(ResultCode.DeleteError, ResultMessage.DeleteError);
+        }
+        return Result.success(ResultCode.DeleteSuccess, ResultMessage.DeleteSuccess);
 
+    }
 
 }

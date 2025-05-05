@@ -7,8 +7,10 @@ import com.yanshedui.backendcommon.entity.dto.PlayerProfileDTO;
 
 public interface PlayerProfileService extends IService<PlayerProfile> {
 
-    Page<PlayerProfile> getPlayersByPage(int currentPage, int pageSize);
+    Page<PlayerProfile> getPlayersByPage(Integer currentPage, Integer pageSize);
 
     Boolean updatePlayerProfileById(PlayerProfileDTO playerProfileDTO);
+
+    PlayerProfile getPlayerByUserId(Integer id);
 
 }

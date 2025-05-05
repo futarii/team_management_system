@@ -1,5 +1,6 @@
 package com.yanshedui.backendteam.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yanshedui.backendcommon.entity.PlayerProfile;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class PlayerProfileServiceImpl extends ServiceImpl<PlayerProfileDao, PlayerProfile> implements PlayerProfileService {
 
     @Override
-    public Page<PlayerProfile> getPlayersByPage(int currentPage, int pageSize) {
+    public Page<PlayerProfile> getPlayersByPage(Integer currentPage, Integer pageSize) {
         Page<PlayerProfile> page = new Page<>(currentPage, pageSize);
         return this.page(page);
     }
@@ -23,5 +24,19 @@ public class PlayerProfileServiceImpl extends ServiceImpl<PlayerProfileDao, Play
         PlayerProfile playerProfile = new PlayerProfile();
         BeanUtils.copyProperties(playerProfileDTO, playerProfile);
         return this.updateById(playerProfile);
+    }
+
+    @Override
+    public PlayerProfile getPlayerByUserId(Integer id) {
+        LambdaQueryWrapper<PlayerProfile> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(PlayerProfile::getUserId, id);
+        queryWrapper.select(PlayerProfile::getRealName,
+                PlayerProfile::getRealName,
+                PlayerProfile::getJerseyNumber,
+                PlayerProfile::getPosition,
+                PlayerProfile::getHeight,
+                PlayerProfile::getWeight,
+                PlayerProfile::getJoinDate);
+        return this.getOne(queryWrapper);
     }
 }

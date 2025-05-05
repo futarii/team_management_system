@@ -6,7 +6,7 @@ import com.yanshedui.backendcommon.entity.TeamPosition;
 
 public interface TeamPositionService extends IService<TeamPosition> {
 
-    Page<TeamPosition> getTeamPositionByPages(int currentPage, int pageSize);
+    Page<TeamPosition> getTeamPositionByPages(Integer currentPage, Integer pageSize);
 
     boolean createTeamPosition(TeamPosition teamPosition);
 

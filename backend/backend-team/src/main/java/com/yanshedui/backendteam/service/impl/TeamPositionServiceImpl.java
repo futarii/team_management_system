@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class TeamPositionServiceImpl extends ServiceImpl<TeamPositionDao, TeamPosition> implements TeamPositionService {
 
     @Override
-    public Page<TeamPosition> getTeamPositionByPages(int currentPage, int pageSize) {
+    public Page<TeamPosition> getTeamPositionByPages(Integer currentPage, Integer pageSize) {
         Page<TeamPosition> page = new Page<>(currentPage, pageSize);
         return this.page(page);
     }
